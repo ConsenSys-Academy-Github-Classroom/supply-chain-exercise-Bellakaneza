@@ -23,10 +23,10 @@ contract SupplyChain {
    */
 
   // <LogForSale event: sku arg>
-   event LogForSale(uint indexed sku);
+  event LogForSale(uint indexed sku);
 
   // <LogSold event: sku arg>
-   event LogSold(uint indexed sku);
+  event LogSold(uint indexed sku);
 
   // <LogShipped event: sku arg>
   event LogShipped(uint indexed sku);
@@ -85,7 +85,7 @@ contract SupplyChain {
       _;
     }
   // modifier sold(uint _sku) 
-   modifier sold(uint _sku) {
+  modifier sold(uint _sku) {
       require(items[_sku].state == State.Sold);
       _;
     }
@@ -110,7 +110,7 @@ contract SupplyChain {
 
   function addItem(string memory _name, uint _price) public returns (bool) {
     // 1. Create a new item and put in array
-      items[skuCount] = Item({
+    items[skuCount] = Item({
      name: _name, 
      sku: skuCount, 
      price: _price, 
@@ -120,7 +120,7 @@ contract SupplyChain {
     });
 
     // 2. Increment the skuCount by one
-     skuCount = skuCount + 1;
+    skuCount = skuCount + 1;
 
     // 3. Emit the appropriate event
     emit LogForSale(skuCount);
@@ -151,14 +151,14 @@ contract SupplyChain {
   // 3. set the buyer as the person who called this transaction, 
    items[sku].buyer = msg.sender;
   // 4. set the state to Sold. 
-   items[sku].state = State.Sold;
+  items[sku].state = State.Sold;
   // 5. this function should use 3 modifiers to check 
   //    - if the item is for sale, 
   //    - if the buyer paid enough, 
   //    - check the value after the function is called to make 
   //      sure the buyer is refunded any excess ether sent. 
   // 6. call the event associated with this function!
-   emit LogSold(sku);
+  emit LogSold(sku);
    }
 
 
